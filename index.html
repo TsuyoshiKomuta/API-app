@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>そうぞくMAP</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- ヘッダー -->
+    <header class="header">
+        <div class="logo">
+            <a href="index.html"><img src="images/logo_souzokumap.png" alt="そうぞくMAPロゴ"></a>
+            <nav class="nav-links">
+                <h3><a href="#consultation_site">法律AI相続相談とは？</a></h3>
+            </nav>
+        </div>
+        
+        <div class="nav-buttons">
+            <button class="login-button">ログイン</button>
+            <button id="open-modal_01" class="signup-button">無料で始める</button>
+        </div>
+    </header>
+
+    <div class="main-visual">
+        <h1>相続を、「体験」する。</h1>
+        <button id="open-modal_02" class="main-signup-button">無料で始める</button>
+        
+        <!-- サインアップモーダル画面 -->
+        <div id="signup-modal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <div class="sign-up-field">
+                    <button class="button-google">Googleで続行</button>
+                    <p>メールアドレスとパスワードを設定</p>
+                    <div>
+                        <input id="email" type="email" class="form-input" placeholder="メールアドレス" />
+                    </div>
+                    <div>
+                        <input id="password" type="password"  class="form-input" placeholder="パスワード" />
+                    </div>
+                    <button id="register" class="form-input">アカウントを作成</button>
+                    <!-- エラーメッセージの表示エリア -->
+                    <div id="error-message" class="error-message"></div>
+                    <p>アカウントをお持ちの場合は<a class="link-login" href="#">ログイン</a></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ログインモーダル画面 -->
+        <div id="login-modal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <div class="sign-in-field">
+                    <button class="button-google">Googleで続行</button>
+                    <div>
+                        <input id="login-email" type="email" class="form-input" placeholder="メールアドレス" />
+                    </div>
+                    <div>
+                        <input id="login-password" type="password" class="form-input" placeholder="パスワード" />
+                    </div>
+                    <button id="login">ログイン</button>
+                    <!-- エラーメッセージの表示エリア -->
+                    <div id="login-error-message" class="error-message"></div>
+                    <p>アカウントをお持ちでない場合は<a class="link-signup" href="#">作成する</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div  id="consultation_site" class="consultation_site">
+        <h1 style="font-size: 50px;" class="consultation_site_title">
+            <span style="color: blue;">法</span>
+            <span style="color: green;">律</span>
+            <span style="color: yellow;">Ａ</span>
+            <span style="color: red;">Ｉ</span>
+            相 続 の 相 談
+        </h1>    
+        <h2>法律AI相続相談は、法律を踏まえてAIが相談内容を生成、回答する相談フォームです。</h2>
+        <h2 style="color: gray;">【法律AI相続相談のイメージ】</h2>
+        <div class="consultation_description"><img src="images/consultation_description.jpg" alt=""></div>
+        <h2>① 相続の相談を入力します。内容は法律用語などを意識する必要はなく、事実を入力してください。</h2>
+        <h2>② AI（OpenAIのAPIを使用）が相談内容を法的な思考で要約し、相談内容に関係する法律を探します（e-Gov法令取得APIを使用）。</h2>
+        <h2>③ 相談内容に関係する法律をピックアップします。</h2>
+        <h2>④ ピックアップした法律の内容を踏まえてAIが回答を作成し、回答と関係法律を答えます。</h2>
+        <h2><a href="consultation.html">相談する</a></h2>
+    </div>
+
+    <!-- フッター -->
+    <footer>
+        © 2024 com-office.
+    </footer>
+
+    <!-- jquery読み込み -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script type="module">
+        // Firebaseの初期化
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBD3tt99eb2Baereq7wa3pvB3T57XdAKyc",
+            authDomain: "login-authentication-4cc56.firebaseapp.com",
+            projectId: "login-authentication-4cc56",
+            storageBucket: "login-authentication-4cc56.appspot.com",
+            messagingSenderId: "357733831947",
+            appId: "1:357733831947:web:b9b87022bc54912cf6be0e"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const provider = new GoogleAuthProvider();
+
+        $(document).ready(function () {
+            // モーダルを開く
+            $("#open-modal_01").click(function () {
+                setTimeout(function () {
+                    $("#signup-modal").fadeIn();
+                }, 500);
+            });
+
+            $("#open-modal_02").click(function () {
+                setTimeout(function () {
+                    $("#signup-modal").fadeIn();
+                }, 500);
+            });
+
+            $(".login-button").click(function () {
+                setTimeout(function () {
+                    $("#login-modal").fadeIn();
+                }, 500);
+            });
+
+            // モーダルを閉じる
+            $(".close").click(function () {
+                $(".modal").fadeOut();
+            });
+
+            // 外側をクリックしてモーダルを閉じる
+            $(window).click(function (event) {
+                if ($(event.target).is(".modal")) {
+                    $(".modal").fadeOut();
+                }
+            });
+
+            // 新規登録ボタンのクリックイベント
+            $("#register").click(function () {
+                const email = $('#email').val();
+                const password = $('#password').val();
+                const errorMessage = $("#error-message");
+
+                errorMessage.text("").hide();
+
+                // 新規登録処理
+                createUserWithEmailAndPassword(auth, email, password)
+                    .then((userCredential) => {
+                        // 新規登録成功
+                        alert("アカウント登録を完了しました");
+                        window.location.href = "index.html";
+                    })
+                    .catch((error) => {
+                        // エラーメッセージの表示
+                        console.error("新規登録エラー", error.message);
+                        if (error.code === "auth/email-already-in-use") {
+                            errorMessage.text("このメールアドレスはすでに登録されています。別のメールアドレスを設定してください。").show();
+                        } else {
+                            errorMessage.text('登録できませんでした。もう一度お試しください。').show();
+                        }
+                    });
+            });
+
+            // ログインボタンのクリックイベント
+            $("#login").click(function () {
+                const email = $('#login-email').val();
+                const password = $('#login-password').val();
+                const errorMessage = $("#login-error-message");
+
+                errorMessage.text("").hide();
+
+                // ログイン処理
+                signInWithEmailAndPassword(auth, email, password)
+                    .then((userCredential) => {
+                        // ログイン成功
+                        alert("ログイン成功しました\nトップページに戻ります");
+                        window.location.href = "souzokumap.html";
+                    })
+                    .catch((error) => {
+                        // エラーメッセージの表示
+                        console.error("ログインエラー", error.message);
+                        errorMessage.text("ログインに失敗しました。もう一度お試しください。").show();
+                    });
+            });
+
+            // Googleでログイン
+            $(".button-google").click(function () {
+                signInWithPopup(auth, provider)
+                .then((result) => {
+                    window.location.href = "souzokumap.html";
+                })
+                .catch((error) => {
+                    const errorMessage = $("#error-message");
+                    errorMessage.text("Googleアカウントでのログインに失敗しました\nもう一度お試しください").show();
+                    console.error("Googleログインエラー", error.message);
+                });
+            });
+
+        });
+    </script>
+
+</body>
+
+</html>

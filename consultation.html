@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>そうぞくMAP</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kosugi&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- ヘッダー -->
+    <header class="header">
+        <div class="logo">
+            <a href="index.html"><img src="images/logo_souzokumap.png" alt="そうぞくMAPロゴ"></a>
+        </div>
+        <nav class="nav-links">
+            <!-- ナビゲーションリンクをここに追加する -->
+        </nav>
+        <div class="nav-buttons">
+            <button class="logout-button">ログアウト</button>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="dashboard">
+            <div class="consultation_title">
+                <h1>
+                    <span style="color: blue;">法</span>
+                    <span style="color: green;">律</span>
+                    <span style="color: yellow;">Ａ</span>
+                    <span style="color: red;">Ｉ</span>
+                    相 続 の 相 談
+                </h1>
+            </div>
+
+            <form id="consultation-form" class="consultation-form">
+                <textarea id="consultation" placeholder="相続相談を入力（shift+return: 改行, return: 回答を送信）"></textarea><br>
+                <button type="button" id="submit-button">ＡＩに送信</button>
+            </form>
+            <!-- ここに相談に対する回答を表示 -->
+            <div id="result">
+                <div id="question-container" class="content-box question-box"></div>
+                <div id="answer-container" class="content-box answer-box"></div>
+                <div id="law-container" class="content-box law-box"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- フッター -->
+    <footer>
+        © 2024 com-office.
+    </footer>
+
+    <!-- jQuery読み込み -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <!-- axiosライブラリの読み込み -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <!-- Firebase SDK読み込み -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import {
+            getFirestore,
+            collection,
+            addDoc,
+            serverTimestamp,
+        } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "API-KEY",
+            authDomain: "souzokumap-consultation.firebaseapp.com",
+            projectId: "souzokumap-consultation",
+            storageBucket: "souzokumap-consultation.appspot.com",
+            messagingSenderId: "562536551780",
+            appId: "1:562536551780:web:db79f6df9009f569e55671"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+    </script>
+    <script src="script.js"></script>
+</body>
+
+</html>

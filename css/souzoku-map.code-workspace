@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		},
+		{
+			"path": "../../04_js_chat_sample"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "souzoku-map"
+	}
+}
